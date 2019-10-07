@@ -1,4 +1,4 @@
-### SELECT-NAME ANSWER KEY ###
+# SELECT-NAME ANSWER KEY #
 Completed in October 7, 2019 :octocat:
 > Link: https://sqlzoo.net/wiki/SELECT_names
 
@@ -52,4 +52,35 @@ WHERE name LIKE '%o__o%'
 ```mysql
 SELECT name FROM world
 WHERE name LIKE '____'
+```
+### HARDER QUESTIONS ###
+**11. Find the country where the name is the capital city**
+```mysql
+SELECT name
+FROM world
+WHERE name = capital
+```
+**12. Find the country where the capital is the country plus "City"**
+```mysql
+SELECT name
+FROM world
+WHERE capital = CONCAT(name, ' City')
+```
+**13. Find the capital and the name where the capital includes the name of the country**
+```mysql
+SELECT capital, name
+FROM world
+WHERE capital LIKE CONCAT('%',name,'%')
+```
+**14. Find the capital and the name where the capital is an extension of name of the country**
+```mysql
+SELECT capital, name
+FROM world
+WHERE capital LIKE CONCAT(name,'%') AND capital != name
+```
+**15. Show the name and the extension where the capital is an extension of name of the country**
+```mysql
+SELECT name, REPLACE(capital, name,'') AS extension
+FROM world
+WHERE capital LIKE CONCAT(name,'%') AND capital != name
 ```
