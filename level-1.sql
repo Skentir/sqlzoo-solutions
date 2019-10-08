@@ -1,0 +1,60 @@
+SELECT JOBTITLE, COUNT(ENUM) AS empno
+FROM employee_jobs
+GROUP BY JOBTITLE
+HAVING COUNT(ENUM) > 3
+ORDER BY JOBTITLE;
+
+SELECT PNO,
+COUNT(ENUM) AS total
+FROM employee_project
+WHERE DATELEFT IS NULL
+GROUP BY PNO;
+
+SELECT ENUM
+FROM employee_spouse
+WHERE SENUM IS NOT NULL;
+
+SELECT  VCODE, DNAME, COUNT(ORDERCODE) AS sold
+FROM orders
+GROUP BY VCODE, DNAME;
+
+SELECT PNO, COUNT(ENUM)
+FROM employee_project
+WHERE DATELEFT IS NOT NULL
+GROUP BY PNO
+HAVING COUNT(ENUM) > 5;
+
+SELECT emp.NAME, ee.DEGREE
+FROM employee_engineers ee
+INNER JOIN employee emp ON (ee.ENUM = emp.ENUM);
+
+SELECT emp.DNAME, emp.NAME 
+FROM employee emp 
+INNER JOIN employee_secretary es
+ON es.ENUM = emp.ENUM; 
+
+SELECT v.VNAME, v.VCODE, 
+COUNT(o.ORDERCODE) AS  total
+FROM vendor v 
+JOIN orders o
+ON v.VCODE = o.VCODE
+WHERE YEAR(o.DATEPROC) = 2011
+GROUP BY v.VNAME, v.VCODE;
+
+SELECT emp.ENUM, es.NAME, 
+ROUND(DATEDIFF(NOW(),DOM)/365, 0) AS yearsMarried
+FROM employee_spouse emp
+LEFT JOIN employee es 
+ON emp.ENUM = es.ENUM;
+ 
+SELECT p.PNO, p.PNAME, COUNT(ep.ENUM)
+FROM project p
+LEFT JOIN employee_project ep
+ON p.PNO = ep.PNO
+WHERE p.DEVSTAGE = 'Planning'
+GROUP BY p.PNO, p.PNAME; 
+
+SELECT emp.ENUM, emp.NAME, es.TYPINGSPEED
+FROM employee emp
+JOIN employee_secretary es
+ON emp.ENUM ;
