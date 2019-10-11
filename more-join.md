@@ -109,3 +109,16 @@ WHERE m.yr = 1978
 GROUP BY m.title
 ORDER BY COUNT(c.actorid) DESC, title
 ```
+**15.**
+```mysql
+SELECT DISTINCT name FROM casting
+JOIN actor ON actorid = actor.id
+WHERE name != 'Art Garfunkel'
+AND movieid IN (
+		SELECT movieid
+		FROM movie
+		JOIN casting ON movieid = movie.id
+		JOIN actor ON actorid = actor.id
+		WHERE actor.name = 'Art Garfunkel'
+)
+```
